@@ -26,6 +26,18 @@ System started datomic:dev://localhost:4334/<DB-NAME>, storing data in: data
 Os dados serão salvos do diretório /data
 ```
 
+## Adicionando repositório ao leiningen
+
+Em nosso arquivo `~/lein/credentials.clj.gpg` teremos que colocar alguma informação. Para isso, vamos no terminal, abrimos uma nova aba, vamos no diretório e criamos um novo diretório chamado `.lein`.
+
+No arquivo `credentials.clj.gpg` adicionaremos o via copiando as linhas de código encontradas na página.
+
+```
+{#'my\.datomic\.com" {:username "guilherme.silveira@caelum.com.br"
+    password "781e9538-97e0-43fd-ba36-840c06080743'}} 
+```
+Salvamos o arquivo de credenciais.
+
 ## Integração via Peer Library
 Logo após baixar as dependências devemos rodar a biblioteca do datomic rodando o seguinte comando na pasta raiz contendo o jar
 
