@@ -16,3 +16,11 @@
 
 ;receive the connection and an sequence ([map])
 (pprint (d/transact conn [person])))
+
+; received the database state (SNAPSHOT)
+(def db (d/db conn))
+
+;receive identity id of datoms that have an person name
+(pprint (d/q '[:find ?entity
+               :where [?entity :person/name]] db))
+
