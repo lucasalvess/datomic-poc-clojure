@@ -1,4 +1,4 @@
-(ns datomic-clojure.person-model)
+(ns datomic-clojure.model.person-model)
 
 (defn create-person [cpf name gender email birth_date profession
                     patrimony]

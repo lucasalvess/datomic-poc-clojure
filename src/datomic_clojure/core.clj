@@ -2,7 +2,7 @@
   (:use clojure.pprint)
   (:require [datomic.api :as d]
             [datomic-clojure.db :as db]
-            [datomic-clojure.person-model :as model]))
+            [datomic-clojure.model.person-model :as model]))
 
 ;define an connection
 (def conn (db/open-connect))
@@ -31,12 +31,13 @@
       result @(d/transact conn [person2])
       id-entity (-> result :tempids vals first)]
 
-(pprint id-entity)
+  (pprint id-entity)
 
-;update patrimony
-(pprint @(d/transact conn [[:db/add id-entity :person/patrimony 0.1M]]))
+  ;update patrimony
+  (pprint @(d/transact conn [[:db/add id-entity :person/patrimony 0.1M]]))
 
-;remove
-(pprint @(d/transact conn [[:db/retract id-entity :person/profession "Baggins"]])))
+  ;remove
+  (pprint @(d/transact conn [[:db/retract id-entity :person/profession "Baggins"]]))
+  )
 
 (db/drop-database)
