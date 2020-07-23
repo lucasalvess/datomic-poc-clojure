@@ -8,24 +8,9 @@
 (def conn (db/open-connect))
 (db/create-schema conn)
 
-;transact persons
-(let [person1
-      (model/create-person "111.111.111-11", "Gandalf the Grey", "M",
-                           "gandof@middleearth.com", (new java.util.Date), "Mage", 10000.00M)
-      person2
-      (model/create-person "222.222.222-22", "Frodo Baggins", "M",
-                           "frodo@middleearth.com", (new java.util.Date), "Baggins", 700.00M)
-      person3
-      (model/create-person "333.333.333-33", "Legolas Greenleaf", "M",
-                           "legolas@valfenda.com", (new java.util.Date), "Messenger", 700.00M)]
-  (d/transact conn [person1,person2,person3]))
-
-;received the database state (SNAPSHOT)
-(def db (d/db conn))
-
 ;return entity id in datom with person name in attr
 (d/q '[:find ?entity
-               :where [?entity :person/name]] db)
+               :where [?entity :person/name]] (d/db conn))
 
 ;simple generic query map
 (defn find-all-persons-map [db]
@@ -61,3 +46,4 @@
                 [?entity :person/patrimony ?patrimony]
                 [?entity :person/birth_date ?birth-date]
                 [?entity :person/cpf ?cpf]] db))
+
