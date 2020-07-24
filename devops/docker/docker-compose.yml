@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  db:
+    build:
+      dockerfile: ./docker/Dockerfile
+      context: ../
+    image: lucas/datomic
+    ports:
+      - 4334:4334
+      - 4335:4335
+      - 4336:4336
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
+

@@ -2,7 +2,7 @@
   (:use clojure.pprint)
   (:require [datomic.api :as d]))
 
-(def db-url "datomic:dev://localhost:4334/person")
+(def db-url "datomic:free://localhost:4334/person?password=admin")
 
 ;create database if not exists and return connection
 (defn open-connect []
