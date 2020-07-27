@@ -8,7 +8,6 @@
 (def conn (db/open-connect))
 (db/create-schema conn)
 
-;return entity id in datom with person name in attr
 (d/q '[:find ?entity
                :where [?entity :person/name]] (d/db conn))
 

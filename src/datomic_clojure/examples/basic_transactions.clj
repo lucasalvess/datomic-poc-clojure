@@ -14,19 +14,18 @@
                            "gandof@middleearth.com", (new java.util.Date), "Mage", 10000.00M)]
 
   ;receive the connection and an map
-  (pprint @(d/transact conn [person])))
+  (def result @(d/transact conn [person])))
+
+;return entity id
+(def entity-id (-> result :tempids vals first))
 
 ;received the database state (SNAPSHOT)
 (def db (d/db conn))
 
-
-;return entity id
-(def id-entity (d/q '[:find ?entity
-                      :where [?entity :person/name]] db))
-
 ;update patrimony
-(pprint @(d/transact conn [[:db/add id-entity :person/patrimony 0.1M]]))
+(pprint @(d/transact conn [[:db/add entity-id :person/patrimony 0.10M]]))
 
 ;remove profession datom
-(pprint @(d/transact conn [[:db/retract id-entity :person/profession "Baggins"]]))
+(pprint @(d/transact conn [[:db/retract entity-id :person/profession "Mage"]]))
+
 (db/drop-database)
