@@ -16,3 +16,15 @@
 (defn save [conn person]
   @(d/transact conn person))
 
+(defn delete [conn id]
+  @(d/transact conn [[:db/retract id :person]]))
+
+(defn update [conn, id, cpf, name, gender, email, birth_date, profession, patrimony]
+  @(d/transact conn [[:db/add id
+                      [:person/name name]
+                      [:person/profession profession]
+                      [:person/gender gender]
+                      [:person/email email]
+                      [:person/birth_date birth_date]
+                      [:person/cpf cpf]
+                      [:person/patrimony patrimony]]]))
